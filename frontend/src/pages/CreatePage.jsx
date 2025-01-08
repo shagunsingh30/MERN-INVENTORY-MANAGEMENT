@@ -27,7 +27,7 @@ const CreateProductPage = () => {
       <h2
         className={`uppercase text-blue-600 dark:text-blue-300 font-ribeye text-3xl text-center mb-8`}
       >
-        Create Product
+        📦 Create Product
       </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>

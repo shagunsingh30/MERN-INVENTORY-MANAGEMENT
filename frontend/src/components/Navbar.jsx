@@ -14,25 +14,30 @@ const Navbar = () => {
     <nav className="bg-gray-200 dark:bg-gray-800 shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo and App Name */}
-        <Link to={"/"} className="flex items-center space-x-5">
-          <h1 className={`${styles.logoText} `}>Stock Nest</h1>
-        </Link>
+        <div className="flex items-center space-x-2">
+          <span className="text-3xl">🛒</span>
+          <Link to={"/"} className="flex items-center">
+            <h1 className={`${styles.logoText}`}>Stock Nest</h1>
+          </Link>
+        </div>
 
         {/* Buttons */}
-        <div className="flex space-x-4">
+        <div className="flex space-x-2">
           {/* Create Button */}
-          <button className={`flex items-center ${styles.buttonPrimary}`}>
-            <Link
-              to="/create"
-              className="flex items-center space-x-2" // Flex container for aligning the icon and text
-            >
-              <IoIosAddCircle className="text-lg" />
-              <span>Create</span> {/* Wrap text in <span> for better styling */}
+          <button
+            className={`flex items-center justify-center px-3 py-1 text-sm sm:text-base sm:px-5 sm:py-2 ${styles.buttonPrimary}`}
+          >
+            <Link to="/create" className="flex items-center space-x-2">
+              <IoIosAddCircle className="text-base sm:text-lg" />
+              <span>Create</span>
             </Link>
           </button>
 
           {/* Theme Toggle Button */}
-          <button onClick={toggleTheme} className={styles.buttonSecondary}>
+          <button
+            onClick={toggleTheme}
+            className={`flex items-center justify-center px-3 py-1 text-sm sm:text-base sm:px-5 sm:py-2 ${styles.buttonSecondary}`}
+          >
             {darkMode ? "Light Mode" : "Dark Mode"}
           </button>
         </div>

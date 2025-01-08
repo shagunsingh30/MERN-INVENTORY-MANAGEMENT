@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className=" bg-gray-100 dark:bg-gray-800 text-white py-6 mt-10">
+    <footer className=" bg-gray-100 dark:bg-gray-800 text-white py-3 mt-10">
       <div className="container mx-auto text-center">
         <p className="text-blue-600 dark:text-blue-100 text-2xl mb-4">
           Created by Shagun Singh
