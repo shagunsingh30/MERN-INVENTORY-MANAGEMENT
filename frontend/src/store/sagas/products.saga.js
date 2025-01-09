@@ -66,7 +66,7 @@ export function* DeleteProductSaga(action) {
 //API HELPER METHODS
 const getProducts = async () => {
   try {
-    const response = await fetch("http://localhost:5000/api/products");
+    const response = await fetch("/api/products");
 
     if (!response.ok) {
       // Throw an error for non-2xx status codes
@@ -83,7 +83,7 @@ const getProducts = async () => {
 const createProduct = async (productData) => {
   console.log(productData);
   try {
-    const response = await fetch("http://localhost:5000/api/products", {
+    const response = await fetch("/api/products", {
       method: "POST", // HTTP method
       headers: {
         "Content-Type": "application/json", // Specify the content type
@@ -106,7 +106,7 @@ const createProduct = async (productData) => {
 const updateProduct = async (productData, productId) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/products/${productId}`,
+      `/api/products/${productId}`,
       {
         method: "PUT", // HTTP method
         headers: {
@@ -131,7 +131,7 @@ const updateProduct = async (productData, productId) => {
 const deleteProduct = async (productData, productId) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/products/${productId}`,
+      `/api/products/${productId}`,
       {
         method: "DELETE", // HTTP method
         headers: {
