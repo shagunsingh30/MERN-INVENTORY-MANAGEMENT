@@ -66,8 +66,11 @@ export function* DeleteProductSaga(action) {
 //API HELPER METHODS
 const getProducts = async () => {
   try {
-    const response = await fetch("/api/products");
-
+    const apiUrl =
+      import.meta.env.MODE === "production"
+        ? `${window.location.origin}/api/products` // In production, use full URL from current origin
+        : "/api/products";
+    const response = await fetch(apiUrl);
     if (!response.ok) {
       // Throw an error for non-2xx status codes
       throw new Error(`HTTP error! Status: ${response.status}`);
