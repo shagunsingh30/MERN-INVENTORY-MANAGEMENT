@@ -66,7 +66,7 @@ export function* DeleteProductSaga(action) {
 //API HELPER METHODS
 const getProducts = async () => {
   try {
-    const response = await fetch("/api/products");
+    const response = await fetch("http://localhost:5000/api/products");
 
     if (!response.ok) {
       // Throw an error for non-2xx status codes
