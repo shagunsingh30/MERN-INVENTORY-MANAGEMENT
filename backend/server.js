@@ -14,7 +14,7 @@ const app = express(); //This initializes a new Express application instance, wh
 //nodemon package for restarting the server whenever new changes are made.
 
 app.use(express.json()); //allows us to accept json data in req.body
-app.use(cors({origin:'*'}));
+app.use(cors({origin:'https://stock-nest-back-end.onrender.com'}));
 const __dirname = path.resolve();
 app.use("/api/products", productRoutes); //handler function of routes are separated
 
