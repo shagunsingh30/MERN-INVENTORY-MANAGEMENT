@@ -66,11 +66,8 @@ export function* DeleteProductSaga(action) {
 //API HELPER METHODS
 const getProducts = async () => {
   try {
-    const apiUrl =
-      import.meta.env.MODE === "production"
-        ? `${window.location.origin}/api/products` // In production, use full URL from current origin
-        : "/api/products";
-    const response = await fetch(apiUrl);
+    const response = await fetch("http://localhost:5000/api/products");
+
     if (!response.ok) {
       // Throw an error for non-2xx status codes
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -86,7 +83,7 @@ const getProducts = async () => {
 const createProduct = async (productData) => {
   console.log(productData);
   try {
-    const response = await fetch("/api/products", {
+    const response = await fetch("http://localhost:5000/api/products", {
       method: "POST", // HTTP method
       headers: {
         "Content-Type": "application/json", // Specify the content type
@@ -108,13 +105,16 @@ const createProduct = async (productData) => {
 };
 const updateProduct = async (productData, productId) => {
   try {
-    const response = await fetch(`/api/products/${productId}`, {
-      method: "PUT", // HTTP method
-      headers: {
-        "Content-Type": "application/json", // Specify the content type
-      },
-      body: JSON.stringify(productData), // Convert the data to a JSON string
-    });
+    const response = await fetch(
+      `http://localhost:5000/api/products/${productId}`,
+      {
+        method: "PUT", // HTTP method
+        headers: {
+          "Content-Type": "application/json", // Specify the content type
+        },
+        body: JSON.stringify(productData), // Convert the data to a JSON string
+      }
+    );
 
     if (!response.ok) {
       // Throw an error if the response status is not in the 2xx range
@@ -130,13 +130,16 @@ const updateProduct = async (productData, productId) => {
 };
 const deleteProduct = async (productData, productId) => {
   try {
-    const response = await fetch(`/api/products/${productId}`, {
-      method: "DELETE", // HTTP method
-      headers: {
-        "Content-Type": "application/json", // Specify the content type
-      },
-      body: JSON.stringify(productData), // Convert the data to a JSON string
-    });
+    const response = await fetch(
+      `http://localhost:5000/api/products/${productId}`,
+      {
+        method: "DELETE", // HTTP method
+        headers: {
+          "Content-Type": "application/json", // Specify the content type
+        },
+        body: JSON.stringify(productData), // Convert the data to a JSON string
+      }
+    );
 
     if (!response.ok) {
       // Throw an error if the response status is not in the 2xx range
