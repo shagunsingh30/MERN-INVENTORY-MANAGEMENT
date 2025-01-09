@@ -1,39 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  products: [
-    {
-      id: 1,
-      name: "Product 1",
-      price: "$20",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: "$30",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: "$40",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      price: "$50",
-      image: "https://picsum.photos/200",
-    },
-    {
-      id: 5,
-      name: "Product 5",
-      price: "$60",
-      image: "https://picsum.photos/200",
-    },
-  ],
+  products: [],
   currProduct: {},
+  loading: false,
+  error: {},
 };
 
 const productSlice = createSlice({
@@ -44,12 +15,58 @@ const productSlice = createSlice({
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+    createProduct: (state) => {
+      state.loading = true;
+    },
+    createProductSuccess: (state, action) => {
+      state.loading = false;
+      state.products = [...state.products, action.payload];
+    },
+    createProductFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    UpdateProductAction: (state) => {
+      state.loading = true;
+    },
+    UpdateProductSuccess: (state) => {
+      state.loading = false;
+      state.error = {};
+    },
+    UpdateProductFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    DeleteProduct: (state) => {
+      state.loading = true;
+    },
+    DeleteProductSuccess: (state) => {
+      state.loading = false;
+      state.error = {};
+    },
+    DeleteProductFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     setCurrentProduct: (state, action) => {
       state.currProduct = action.payload;
     },
   },
 });
 
-export const {fetchProducts,setCurrentProduct,setProducts} = productSlice.actions;
+export const {
+  fetchProducts,
+  setCurrentProduct,
+  setProducts,
+  createProduct,
+  createProductSuccess,
+  createProductFailure,
+  UpdateProductAction,
+  UpdateProductSuccess,
+  UpdateProductFailure,
+  DeleteProduct,
+  DeleteProductSuccess,
+  DeleteProductFailure,
+} = productSlice.actions;
 
 export default productSlice.reducer;

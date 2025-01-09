@@ -1,16 +1,46 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchProducts,
+  UpdateProductAction,
+} from "../store/reducers/product.reducer";
 
-const UpdateProduct = ({ isOpen, onClose, product }) => {
+const UpdateProduct = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.products.currProduct);
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
   const [imageUrl, setImageUrl] = useState(product.image);
-
+  useEffect(() => {
+    if (product) {
+      setName(product.name || "");
+      setPrice(product.price || "");
+      setImageUrl(product.image || "");
+    }
+  }, [isOpen, product]);
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logic for updating the product
-    console.log("Product Updated:", { name, price, imageUrl });
+    dispatch(
+      UpdateProductAction({
+        _id: product._id,
+        name,
+        price,
+        image: imageUrl,
+        onSuccess: () => {
+          dispatch(fetchProducts());
+          // dispatch(setCurrentProduct(newProduct));
+        },
+      })
+    );
+    console.log("Product Updated:", {
+      _id: product._id,
+      name,
+      price,
+      imageUrl,
+    });
     onClose(); // Close the modal after submission
   };
 

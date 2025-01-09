@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
 import styles from "../styles";
+import { useDispatch } from "react-redux";
+import {
+  createProduct,
+  fetchProducts,
+} from "../store/reducers/product.reducer";
 
 const CreateProductPage = () => {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState({
     name: "",
     price: "",
-    imageUrl: "",
+    image: "",
   });
 
   const handleChange = (e) => {
@@ -16,10 +22,17 @@ const CreateProductPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle product submission here (e.g., make API request)
+    dispatch(
+      createProduct({
+        product,
+        onSuccess: () => {
+          dispatch(fetchProducts());
+        },
+      })
+    );
     console.log("Product added:", product);
     // Reset form after submission
-    setProduct({ name: "", price: "", imageUrl: "" });
+    setProduct({ name: "", price: "", image: "" });
   };
 
   return (
@@ -68,16 +81,16 @@ const CreateProductPage = () => {
         </div>
         <div>
           <label
-            htmlFor="imageUrl"
+            htmlFor="image"
             className={`block text-lg font-medium ${styles.textPrimary} mb-2`}
           >
             Image URL
           </label>
           <input
             type="url"
-            id="imageUrl"
-            name="imageUrl"
-            value={product.imageUrl}
+            id="image"
+            name="image"
+            value={product.image}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
             placeholder="Enter image URL"

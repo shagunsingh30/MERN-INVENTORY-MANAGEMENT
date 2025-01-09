@@ -1,9 +1,9 @@
 const styles = {
   // Button Styles
   buttonPrimary:
-    "bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-blue-700 text-white font-medium py-2 px-4 rounded font-poppins text-xl",
+    "bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-blue-700 text-white font-medium py-2 px-4 rounded text-xl",
   buttonSecondary:
-    "bg-gradient-to-r from-gray-400 via-indigo-500 to-gray-600 hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-600 hover:to-indigo-700 text-white font-medium py-2 px-4 rounded font-poppins text-xl",
+    "bg-gradient-to-r from-gray-400 via-indigo-500 to-gray-600 hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-600 hover:to-indigo-700 text-white font-medium py-2 px-4 rounded text-xl",
 
   // Heading Text
   headingText:

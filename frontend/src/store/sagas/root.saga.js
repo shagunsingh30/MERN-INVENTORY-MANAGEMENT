@@ -1,12 +1,22 @@
-// import { all, takeEvery } from "redux-saga/effects";
-// import { todoActions } from "../reducers/todo.reducer";
-// import { postActions } from "../reducers/post.reducer";
-// import { GetTodosSaga } from "./todo.saga";
-// import { GetPostsSaga } from "./post.saga";
+import { all, takeEvery } from "redux-saga/effects";
+import {
+  CreateProductSaga,
+  DeleteProductSaga,
+  GetProductsSaga,
+  UpdateProductSaga,
+} from "./products.saga";
+import {
+  createProduct,
+  DeleteProduct,
+  fetchProducts,
+  UpdateProductAction,
+} from "../reducers/product.reducer.js";
 
-// export function* rootSaga() {
-//   yield all([
-//     takeEvery(todoActions.fetchTodos.type, GetTodosSaga),
-//     takeEvery(postActions.fetchPosts.type, GetPostsSaga),
-//   ]);
-// }
+export function* rootSaga() {
+  yield all([
+    takeEvery(fetchProducts, GetProductsSaga),
+    takeEvery(createProduct, CreateProductSaga),
+    takeEvery(UpdateProductAction, UpdateProductSaga),
+    takeEvery(DeleteProduct, DeleteProductSaga),
+  ]);
+}

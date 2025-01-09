@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo and App Name */}
         <div className="flex items-center space-x-2">
-          <span className="text-3xl">🛒</span>
+          <span className="text-3xl hidden md:block">🛒</span>
           <Link to={"/"} className="flex items-center">
             <h1 className={`${styles.logoText}`}>Stock Nest</h1>
           </Link>
