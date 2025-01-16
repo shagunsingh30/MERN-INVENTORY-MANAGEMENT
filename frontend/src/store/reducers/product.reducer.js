@@ -4,6 +4,9 @@ const initialState = {
   products: [],
   currProduct: {},
   loading: false,
+  updateloading: false,
+  createloading: false,
+  deleteloading: false,
   error: {},
 };
 
@@ -11,41 +14,51 @@ const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    fetchProducts: () => {},
+    fetchProducts: (state) => {
+      state.loading = true;
+    },
+    fetchProductsSucess: (state, action) => {
+      state.loading = false;
+      state.products = action.payload;
+    },
+    fetchProductsFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     setProducts: (state, action) => {
       state.products = action.payload;
     },
     createProduct: (state) => {
-      state.loading = true;
+      state.createloading = true;
     },
     createProductSuccess: (state, action) => {
-      state.loading = false;
+      state.createloading = false;
       state.products = [...state.products, action.payload];
     },
     createProductFailure: (state, action) => {
-      state.loading = false;
+      state.createloading = false;
       state.error = action.payload;
     },
     UpdateProductAction: (state) => {
-      state.loading = true;
+      state.updateloading = true;
     },
     UpdateProductSuccess: (state) => {
-      state.loading = false;
+      state.updateloading = false;
       state.error = {};
     },
     UpdateProductFailure: (state, action) => {
-      state.loading = false;
+      state.updateloading = false;
       state.error = action.payload;
     },
     DeleteProduct: (state) => {
-      state.loading = true;
+      state.deleteloading = true;
     },
     DeleteProductSuccess: (state) => {
-      state.loading = false;
+      state.deleteloading = false;
       state.error = {};
     },
     DeleteProductFailure: (state, action) => {
-      state.loading = false;
+      state.deleteloading = false;
       state.error = action.payload;
     },
     setCurrentProduct: (state, action) => {
@@ -56,6 +69,8 @@ const productSlice = createSlice({
 
 export const {
   fetchProducts,
+  fetchProductsSucess,
+  fetchProductsFailure,
   setCurrentProduct,
   setProducts,
   createProduct,

@@ -15,6 +15,12 @@ const styles = {
 
   // Description Text
   descriptionText: "text-base text-gray-700 dark:text-gray-200",
+
+  //loader
+  loaderContainer:
+    "fixed inset-0 justify-center items-center bg-white dark:bg-gray-900 z-100",
+  loaderCircle:
+    "w-12 h-12 border-4 border-solid border-blue-500 border-t-transparent rounded-full animate-spin",
 };
 
 export default styles;

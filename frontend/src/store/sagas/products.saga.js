@@ -2,7 +2,9 @@ import { call, put } from "redux-saga/effects";
 import {
   createProductFailure,
   createProductSuccess,
-  setProducts,
+  DeleteProductFailure,
+  DeleteProductSuccess,
+  fetchProductsSucess,
   UpdateProductFailure,
   UpdateProductSuccess,
 } from "../reducers/product.reducer.js";
@@ -11,7 +13,7 @@ import { toastFailure, toastSuccess } from "../../components/toast.jsx";
 export function* GetProductsSaga() {
   try {
     const response = yield call(getProducts);
-    if (response?.success) yield put(setProducts(response.data));
+    if (response?.success) yield put(fetchProductsSucess(response.data));
     else toastFailure("Error in get products saga");
   } catch (error) {
     toastFailure("Error in get products saga");
@@ -55,11 +57,11 @@ export function* DeleteProductSaga(action) {
     if (response?.success) {
       toastSuccess("Product deleted successfully!");
       onSuccess?.();
-      yield put(UpdateProductSuccess(response.data));
+      yield put(DeleteProductSuccess(response.data));
     } else toastFailure("Error in delete products saga");
   } catch (error) {
     toastFailure("Error in delete products saga");
-    yield put(UpdateProductFailure(error.message));
+    yield put(DeleteProductFailure(error.message));
     console.log("error in delete products saga", error.message);
   }
 }

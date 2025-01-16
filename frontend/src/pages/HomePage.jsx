@@ -9,6 +9,7 @@ import {
 } from "../store/reducers/product.reducer.js";
 import DeleteConfirmation from "../components/DeleteProduct.jsx";
 import NoProducts from "../components/NoProducts.jsx";
+import Loader from "../components/Loader.jsx";
 // Example product data
 
 const HomePage = () => {
@@ -17,6 +18,9 @@ const HomePage = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   // const [currProd, setCurrProd] = useState({});
   const currProd = useSelector((state) => state.products.currProduct);
+  const { loading, createloading, updateloading, deleteloading } = useSelector(
+    (state) => state.products
+  );
   const ProductsRedux = useSelector((state) => state.products.products);
   useEffect(() => {
     dispatch(fetchProducts());
@@ -26,6 +30,7 @@ const HomePage = () => {
     setIsModalOpen(!isModalOpen);
   };
   const handleDelete = () => {
+    console.log("prod", currProd);
     dispatch(
       DeleteProduct({
         _id: currProd._id,
@@ -39,7 +44,9 @@ const HomePage = () => {
       })
     );
   };
-  return ProductsRedux.length == 0 ? (
+  return loading || createloading || updateloading || deleteloading ? (
+    <Loader />
+  ) : ProductsRedux.length == 0 ? (
     <NoProducts />
   ) : (
     <div className="w-full bg-gray-100 dark:bg-gray-700 px-4 py-6">

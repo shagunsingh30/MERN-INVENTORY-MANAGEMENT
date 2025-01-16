@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
 import styles from "../styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createProduct,
   fetchProducts,
 } from "../store/reducers/product.reducer";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const CreateProductPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { createLoading } = useSelector((state) => state.products);
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -30,12 +34,15 @@ const CreateProductPage = () => {
         },
       })
     );
+    navigate("/");
     console.log("Product added:", product);
     // Reset form after submission
     setProduct({ name: "", price: "", image: "" });
   };
 
-  return (
+  return createLoading ? (
+    <Loader />
+  ) : (
     <div className="max-w-2xl mt-20 mx-auto p-6 bg-gray-300 dark:bg-gray-800 shadow-lg rounded-lg">
       <h2
         className={`uppercase text-blue-600 dark:text-blue-300 font-ribeye text-3xl text-center mb-8`}
